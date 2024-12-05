@@ -1,1 +1,3 @@
 .history/
+mosquitto/log/
+mosquitto/data/
