@@ -1,0 +1,25 @@
+TIG-Stack Learnings
+https://github.com/michaguillet/tig-stack
+
+apt install -y mosquitto-clients
+
+mosquitto_pub -h mosquitto_broker -p 1883 -t  "plantfarming123" -m "controls,motor=1 state=\"red\""
+
+
+mosquitto_pub -h mosquitto_broker -p 1883 -t "plantfarming123" -m "temperature,sensor=1,location=livingroom value=34.2"
+mosquitto_pub -h mosquitto_broker -p 1883 -t "plantfarming123" -m "temperature,sensor=1,location=office value=34.2"
+mosquitto_pub -h mosquitto_broker -p 1883 -t "plantfarming123" -m "temperature,sensor=1,location=office value=24.2"
+mosquitto_pub -h mosquitto_broker -p 1883 -t "plantfarming123" -m "temperature,sensor=1,location=office value=15.2"
+mosquitto_pub -h mosquitto_broker -p 1883 -t "plantfarming123" -m "temperature,sensor=1,location=office value=23.2"
+
+
+
+
+
+1. docker compose up -d 
+2. Per MQTT auf Topic "plantfarming123" publishen -> via Telegraf in InfluxDB -> Grafana (DB: metrics, TABLE measurements)
+3. in InfluxDB Container mit influxdb Queries machen
+4. Grafana Demo Query: SELECT value FROM temperature WHERE "location" = 'livingroom';
+5. Grafana Login: admin/admin
+6. Telegraf MQTT Config: telegraf.conf.template -> Suche nach "mqtt_consumer"
+7. 
