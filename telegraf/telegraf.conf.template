@@ -331,7 +331,7 @@
 
 # # Configuration for MQTT server to send metrics to
 # [[outputs.mqtt]]
-#   servers = ["localhost:1883"] # required.
+#   servers = ["mqtt-dashboard.com:8884"] # required.
 #
 #   ## MQTT outputs send metrics to this topic format
 #   ##    "<topic_prefix>/<hostname>/<pluginname>/"
@@ -1410,11 +1410,11 @@
 
 
 # Monitor sensors, requires lm-sensors package
-[[inputs.sensors]]
+#[[inputs.sensors]]
   ## Remove numbers from field names.
   ## If true, a field name like 'temp1_input' will be changed to 'temp_input'.
   # remove_numbers = true
-  fieldpass = ["temp*"]
+#  fieldpass = ["temp*"]
 
 # # Retrieves SNMP values from remote agents
 # [[inputs.snmp]]
@@ -1757,17 +1757,15 @@
 
 
 # # Read metrics from MQTT topic(s)
-# [[inputs.mqtt_consumer]]
-#   servers = ["localhost:1883"]
+ [[inputs.mqtt_consumer]]
+   servers = ["tcp://mosquitto_broker:1883"]
 #   ## MQTT QoS, must be 0, 1, or 2
 #   qos = 0
 #
 #   ## Topics to subscribe to
-#   topics = [
-#     "telegraf/host01/cpu",
-#     "telegraf/+/mem",
-#     "sensors/#",
-#   ]
+   topics = [
+     "plantfarming123",
+   ]
 #
 #   # if true, messages that can't be delivered while the subscriber is offline
 #   # will be delivered when it comes back (such as on service restart).
@@ -1791,7 +1789,7 @@
 #   ## Each data format has it's own unique set of configuration options, read
 #   ## more about them here:
 #   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
-#   data_format = "influx"
+  data_format = "influx"
 
 
 # # Read metrics from NATS subject(s)
