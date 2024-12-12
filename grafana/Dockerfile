@@ -1,4 +1,4 @@
-FROM grafana/grafana:9.5.6-ubuntu
+FROM grafana/grafana:11.4.0-ubuntu
 
 LABEL author="Alexis Le Provost <alexis.leprovost@outlook.com>"
 LABEL version="1.0.0"

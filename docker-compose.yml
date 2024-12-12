@@ -29,8 +29,6 @@ services:
             - .env
         networks: 
             - backend
-        depends_on:
-            - mosquitto
             
     grafana:
         build: ./grafana
