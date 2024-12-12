@@ -1758,13 +1758,13 @@
 
 # # Read metrics from MQTT topic(s)
  [[inputs.mqtt_consumer]]
-   servers = ["tcp://172.16.32.5:1883"]
+   servers = ["tcp://172.16.32.125:1883"]
 #   ## MQTT QoS, must be 0, 1, or 2
 #   qos = 0
 #
 #   ## Topics to subscribe to
    topics = [
-     "plantfarming123",
+     "sensor",
    ]
 #
 #   # if true, messages that can't be delivered while the subscriber is offline
@@ -1775,8 +1775,8 @@
 #   client_id = ""
 #
 #   ## username and password to connect MQTT server.
-#   # username = "telegraf"
-#   # password = "metricsmetricsmetricsmetrics"
+username = "telegraf"
+password = "metricsmetricsmetricsmetrics"
 #
 #   ## Optional SSL Config
 #   # ssl_ca = "/etc/telegraf/ca.pem"
