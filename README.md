@@ -56,3 +56,57 @@ docker compose up -d
     3. Reboot your machine
 
 Then access graphana at `http://localhost:3000` (or replace the default port with your **GRAFANA_PORT**'s value).
+
+
+## TIG-Stack Learnings
+
+### Install Mosquitto Clients in Container
+
+```bash
+apt install -y mosquitto-clients
+```
+
+### Publish MQTT Messages to the `sensor` Topic
+
+Use the following commands to publish control and sensor data to the `sensor` topic:
+
+```bash
+mosquitto_pub -h mosquitto_broker -p 1883 -t "sensor" -m "controls,motor=1 state=\"red\""
+
+mosquitto_pub -h mosquitto_broker -p 1883 -t "sensor" -m "temperature,sensor=1,location=livingroom value=34.2"
+mosquitto_pub -h mosquitto_broker -p 1883 -t "sensor" -m "temperature,sensor=1,location=office value=34.2"
+mosquitto_pub -h mosquitto_broker -p 1883 -t "sensor" -m "temperature,sensor=1,location=office value=24.2"
+mosquitto_pub -h mosquitto_broker -p 1883 -t "sensor" -m "temperature,sensor=1,location=office value=15.2"
+mosquitto_pub -h mosquitto_broker -p 1883 -t "sensor" -m "temperature,sensor=1,location=office value=23.2"
+```
+
+### Steps to Visualize Data in TIG-Stack
+
+1. **Start the Services**:
+   ```bash
+   docker compose up -d
+   ```
+
+2. **Publish MQTT Messages**:
+   Send data to the `plantfarming123` topic as shown above. The messages will be consumed by Telegraf and inserted into InfluxDB.
+
+3. **Interact with InfluxDB**:
+   Access the InfluxDB container and query the database:
+   ```bash
+   docker exec -it <influxdb_container_name> influx
+   ```
+
+4. **Grafana Demo Query**:
+   In Grafana, you can use the following query to retrieve data:
+   ```sql
+   SELECT value FROM temperature WHERE "location" = 'livingroom';
+   ```
+
+5. **Grafana Login**:
+   ```
+   Username: admin
+   Password: admin
+   ```
+
+6. **Telegraf MQTT Configuration**:
+   In the `telegraf.conf.template` file, search for the `mqtt_consumer` section to adjust the MQTT settings.
