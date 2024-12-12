@@ -28,11 +28,15 @@ To be installed on your machine.
 * **GRAFANA_PASSWORD** - monitoring password
 * **GRAFANA_PLUGINS_ENABLED** - enable monitoring plugins
 * **GRAFANA_PLUGINS** - monitoring plugins list (fetch all available plugins if empty)
+* **MQTT_BROKER** - IP of the MQTT Broker
+* **MQTT_TOPICS** - Subscribed topics
+* **MQTT_USER** - User to authenticate
+* **MQTT_PASSWORD** - Password to authenticate
 
 Modify it according to your needs and build your custom TIG stack:
 
 ```bash
-$ docker compose up -d
+docker compose up -d
 ```
 
 ### Known issues
@@ -40,18 +44,15 @@ $ docker compose up -d
     1. Create the `docker` group if not exists:
 
     ```bash
-    $ sudo groupadd docker
+    sudo groupadd docker
     ``` 
 
     2. Add your user to the `docker` group:
 
     ```bash
-    $ sudo usermod -aG docker $USER
+    sudo usermod -aG docker $USER
     ```
 
     3. Reboot your machine
 
-Then access graphana at `http://localhost:3000` (or replace the default port with your **GRAPHANA_PORT**'s value).
-
-## License
-Copyright © 2020 Alexis Le Provost. See LICENSE for details.
+Then access graphana at `http://localhost:3000` (or replace the default port with your **GRAFANA_PORT**'s value).
